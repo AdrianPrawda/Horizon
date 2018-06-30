@@ -1,0 +1,10 @@
+# files
+
+.classpath
+.project
+
+# folders
+.settings\
+.vscode\
+artifacts\
+bin\
