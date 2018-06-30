@@ -1,4 +1,4 @@
-package com.apokk.ui;
+package com.apokk.ui.horizon;
 
 public class HorizonApplet {
     

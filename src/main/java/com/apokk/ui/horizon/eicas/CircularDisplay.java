@@ -1,4 +1,4 @@
-package com.apokk.ui.aircraft.eicas;
+package com.apokk.ui.horizon.eicas;
 
 import com.apokk.ui.UIElement;
 import processing.core.PShape;
