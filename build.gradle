@@ -1,0 +1,26 @@
+apply plugin: 'java'
+
+version = '0.0.1-alpha'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Aircraft UI',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.processing', name: 'core', version: '3.3.7'
+}
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs 'artifacts'
+        }
+    }
+}
