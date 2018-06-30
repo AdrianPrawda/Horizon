@@ -1,10 +1,10 @@
 package com.apokk.ui.math;
 
 class BezierVertex {
-    public double[] ctrlPoints;
-    public double[] anchor;
+    public float[] ctrlPoints;
+    public float[] anchor;
 
-    public BezierVertex(double ax, double ay, double cx1, double cy1, double cx2, double cy2) {
+    public BezierVertex(float ax, float ay, float cx1, float cy1, float cx2, float cy2) {
         ctrlPoints[0] = cx1;
         ctrlPoints[1] = cy1;
         ctrlPoints[2] = cx2;
@@ -14,7 +14,7 @@ class BezierVertex {
         anchor[1] = ay;
     }
 
-    public BezierVertex(double[] anchor, double[] ctrl) {
+    public BezierVertex(float[] anchor, float[] ctrl) {
         this(anchor[0], anchor[1], ctrl[0], ctrl[1], ctrl[2], ctrl[3]);
     }
 }

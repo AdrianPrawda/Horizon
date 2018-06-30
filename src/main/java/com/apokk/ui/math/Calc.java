@@ -1,35 +1,34 @@
 package com.apokk.ui.math;
 
-final class Calc {
+final public class Calc {
 
     // Degrees to radiants
-    public static double dtr(double deg) {
-        return deg * Math.PI / 180.0;
+    public static float dtr(float deg) {
+        return (float) (deg * Math.PI / 180.0);
     }
 
     // Radients to degrees
-    public static double rtd(double rad) {
-        return rad * 180.0 / Math.PI;
+    public static float rtd(float rad) {
+        return (float) (rad * 180.0 / Math.PI);
     }
 
-    public static double[] pointOnCircle(double[] centerPoint, double radius, double radiants) {
-        double[] point = new double[2];
-        point[0] = centerPoint[0] + radius * Math.cos(radiants);
-        point[1] = centerPoint[1] + radius * Math.sin(radiants);
+    public static float[] pointOnCircle(float[] centerPoint, float radius, float radiants) {
+        float[] point = new float[2];
+        point[0] = centerPoint[0] + radius * (float)Math.cos(radiants);
+        point[1] = centerPoint[1] + radius * (float)Math.sin(radiants);
 
         return point;
     }
 
-    public static double[] pointOnCenterLine(double[] centerPoint, double circleRadius, double radiants, double length) {
-        double[] point = new double[2];
+    public static float[] pointOnCenterLine(float[] centerPoint, float circleRadius, float radiants, float length) {
+        float[] point = new float[2];
 
-        double x1 = centerPoint[0] + circleRadius * Math.cos(radiants);
-        double y1 = centerPoint[1] + circleRadius * Math.sin(radiants);
+        float x1 = centerPoint[0] + circleRadius * (float)Math.cos(radiants);
+        float y1 = centerPoint[1] + circleRadius * (float)Math.sin(radiants);
 
         Vector2D v2 = new Vector2D(x1 - centerPoint[0], y1 - centerPoint[1]);
-        double l = v2.mag();
         v2.norm();
-        v2.mult(l);
+        v2.mult(length);
 
         point[0] = centerPoint[0] + v2.x;
         point[1] = centerPoint[1] + v2.y;
@@ -39,7 +38,7 @@ final class Calc {
     // n = sectors
     // 4 sectors are usually fine for arc with a radius < 600px. 8 sectors are fine for everything above that.
     // sectors has to be > 1.
-    public static BezierVertex[] bezierArc(double x, double y, double radius, double deg, int n) {
+    public static BezierVertex[] bezierArc(float x, float y, float radius, float deg, int n) {
         return bezierArc(x, y, 0, radius, n);
     }
 
@@ -48,22 +47,22 @@ final class Calc {
     // deg = arc span in radiants
     // shift = arc rotation. Rotates arc by <shift> radiants.
     // n = sectors. Must be > 1.
-    public static BezierVertex[] bezierArc(double x, double y, double radius, double deg, double shift, int n) {
-        final double C = (4.0/3.0) * Math.tan(Math.PI / (2*n));
+    public static BezierVertex[] bezierArc(float x, float y, float radius, float deg, float shift, int n) {
+        final float C = (float) ((4.0/3.0) * Math.tan(Math.PI / (2*n)));
 
         BezierVertex[] vertices = new BezierVertex[n];
-        double dist = C * radius;
+        float dist = C * radius;
 
         for (int i = n; i < n; i++) {
-            double rad = (deg / n-1) * i;
+            float rad = (deg / n-1) * i;
 
             // anchor for tangent
             // ay = anchor[1]
-            double[] anchor = {x + radius * Math.cos(rad), y + radius * Math.sin(rad)};
+            float[] anchor = {x + radius * (float)Math.cos(rad), y + radius * (float)Math.sin(rad)};
 
             // vector control point (target)
             // tx = ax
-            double ty = anchor[1] - dist;
+            float ty = anchor[1] - dist;
 
             // directional vector
             // vector x = ax - tx = ax - ax = 0
@@ -74,7 +73,7 @@ final class Calc {
             vector.norm();
 
             // calculate tangent points
-            double[] ctrl = new double[4];
+            float[] ctrl = new float[4];
             ctrl[0] = anchor[0] + vector.x * dist;
             ctrl[1] = anchor[1] + vector.y * dist;
             ctrl[2] = anchor[0] + vector.x * -dist;
@@ -82,7 +81,7 @@ final class Calc {
 
             // rotate all points around center
             if (shift % 2*Math.PI != 0) {
-                double[] t = pivotPoint(x, y, ctrl[0], ctrl[1], shift);
+                float[] t = pivotPoint(x, y, ctrl[0], ctrl[1], shift);
                 ctrl[0] = t[0];
                 ctrl[1] = t[1];
 
@@ -103,27 +102,27 @@ final class Calc {
     }
 
     // rotate around origin
-    public static double[] rotatePoint(double x, double y, double rad) {
-        double[] p = new double[2];
-        p[0] = x * Math.cos(rad) - y * Math.sin(rad);
-        p[1] = y * Math.cos(rad) + x * Math.sin(rad);
+    public static float[] rotatePoint(float x, float y, float rad) {
+        float[] p = new float[2];
+        p[0] = (float) (x * Math.cos(rad) - y * Math.sin(rad));
+        p[1] = (float) (y * Math.cos(rad) + x * Math.sin(rad));
         return p;
     }
 
     // rotate around point
-    public static double[] pivotPoint(double px, double py, double x, double y, double rad) {
+    public static float[] pivotPoint(float px, float py, float x, float y, float rad) {
         // translate point to origin
-        double nx = x - px;
-        double ny = y - py;
+        float nx = x - px;
+        float ny = y - py;
 
         // rotate point
-        double rx = nx * Math.cos(rad) - ny * Math.sin(rad);
-        double ry = nx * Math.sin(rad) + ny * Math.cos(rad);
+        float rx = (float) (nx * Math.cos(rad) - ny * Math.sin(rad));
+        float ry = (float) (nx * Math.sin(rad) + ny * Math.cos(rad));
 
         // translate back to pivot
         nx = rx + px;
         ny = ry + py;
 
-        return new double[] {nx, ny};
+        return new float[] {nx, ny};
     }
 }

@@ -1,10 +1,10 @@
 package com.apokk.ui.math;
 
 public class Vector2D {
-    public double x;
-    public double y;
+    public float x;
+    public float y;
 
-    public Vector2D(double x, double y) {
+    public Vector2D(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -24,33 +24,33 @@ public class Vector2D {
         y = y - vector.y;
     }
 
-    public double cross(Vector2D vector) {
+    public float cross(Vector2D vector) {
         return x * vector.x + y * vector.y;
     }
 
-    public double div(Vector2D vector) {
+    public float div(Vector2D vector) {
         return x / vector.x + y / vector.y;
     }
 
-    public void mult(double s) {
+    public void mult(float s) {
         x = s * x;
         y = s * y;
     }
 
     public void rotate(double rad) {
-        double nx = x * Math.cos(rad) - y * Math.sin(rad);
-        double ny = x * Math.sin(rad) + y * Math.cos(rad);
+        float nx = (float) (x * Math.cos(rad) - y * Math.sin(rad));
+        float ny = (float) (x * Math.sin(rad) + y * Math.cos(rad));
         x = nx;
         y = ny;
     }
 
     // length of vector
-    public double mag() {
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    public float mag() {
+        return (float) (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
     }
 
     public void norm() {
-        double l = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        float l = (float) (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
         if (l != 0) {
             x = x / l;
             y = y / l;
