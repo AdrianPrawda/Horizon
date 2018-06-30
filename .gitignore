@@ -4,7 +4,8 @@
 .project
 
 # folders
-.settings\
-.vscode\
-artifacts\
-bin\
+.settings
+.vscode
+.gradle
+artifacts
+bin
