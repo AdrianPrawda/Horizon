@@ -24,7 +24,8 @@ public class HorizonApplet extends PApplet {
         stroke(255);
         background(0);
 
-        CircularDisplay s = new CircularDisplay(this, "s", 100, 100, 50, 600, 800, 999);
+        CircularDisplay s = new CircularDisplay(this, "s", 100, 100, 50, 780, 800, 999);
+        s.target(650);
         s.init();
         s.draw();
     }
