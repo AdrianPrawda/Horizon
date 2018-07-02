@@ -9,9 +9,12 @@ public class Vector2D {
         this.y = y;
     }
 
+    public Vector2D(Vector2D vector) {
+        this(vector.x, vector.y);
+    }
+
     public Vector2D() {
-        x = 0;
-        y = 0;
+        this(0, 0);
     }
 
     public void add(Vector2D vector) {
@@ -55,9 +58,5 @@ public class Vector2D {
             x = x / l;
             y = y / l;
         }
-    }
-
-    public Vector2D copy() {
-        return new Vector2D(x, y);
     }
 }

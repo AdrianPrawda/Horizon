@@ -15,6 +15,12 @@ final public class ShapeUtil {
         ShapeUtil.fillAll(color.hex(), shapes);
     }
 
+    public static void noFillAll(PShape... shapes) {
+        for (PShape shape : shapes) {
+            shape.setFill(false);
+        }
+    }
+
     public static void setStrokes(int color, PShape... shapes) {
         for (int i = 0; i < shapes.length; i++) {
             shapes[i].setStroke(color);

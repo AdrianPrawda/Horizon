@@ -30,12 +30,16 @@ public enum Colors {
     B_PINK(0xdd6bdd);
 
     private Colors(int hex) {
-        this.c = new Color(hex);
+        this.hex = hex + 0xff000000;
     }
 
-    private final Color c;
+    private final int hex;
 
     public Color color() {
-        return c;
+        return new Color(hex);
+    }
+
+    public int hex() {
+        return hex;
     }
 }

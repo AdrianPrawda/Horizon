@@ -1,8 +1,8 @@
 package com.apokk.ui;
 
 public class Color {
+    // aarrggbb
     private int hex;
-    private int alpha;
 
     public Color(int r, int g, int b) {
         this(r, g, b, 255);
@@ -13,7 +13,6 @@ public class Color {
         hex += g << 8;
         hex += r << 16;
         hex += a << 24;
-        alpha = a;
     }
 
     public Color(Color c) {
@@ -26,12 +25,10 @@ public class Color {
 
     public Color(int hex) {
         this.hex = hex + 0xff000000;
-        alpha = 255;
     }
 
     public Color(int hex, int a) {
         this.hex = hex + (a << 24);
-        alpha = a;
     }
 
     public void setAlpha(int alpha) {
@@ -45,6 +42,6 @@ public class Color {
     }
 
     public int alpha() {
-        return alpha;
+        return hex >> 24;
     }
 }
